@@ -1,0 +1,13 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Pedro Papadopolis",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@types/qrcode-terminal": "^0.12.0",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.17.1"
+  }
+}
