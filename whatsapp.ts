@@ -143,7 +143,7 @@ const checkForCommands = async (msg: WAWebJS.Message) => {
         return msg.reply("*Escolha um áudio*\n\n" + AUDIOS[keyword].join("\n"));
       }
 
-      if (!AUDIOS[keyword] && keyword.length > 3) {
+      if (!AUDIOS[keyword] && keyword.length >= 3) {
         console.log("Sending all found audios");
 
         const search = Object.values(AUDIOS)
