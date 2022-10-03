@@ -4,9 +4,9 @@ import {
   Interaction,
   InteractionResponseType,
 } from "@/typings";
-import { AUDIOS } from "@whatsapp/audios";
-import { audioBasePath } from "@whatsapp/constants";
+import { AUDIOS } from "@/audios";
 import { Buttons } from "whatsapp-web.js";
+import { audioBasePath } from "@/constants";
 
 export class SoundsInteraction extends Interaction {
   constructor() {

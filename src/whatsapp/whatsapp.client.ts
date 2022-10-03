@@ -9,7 +9,11 @@ import WAWebJS, { Client, LocalAuth, MessageMedia } from "whatsapp-web.js";
 
 const fiveMinutes = 300000;
 
-const newMessagesTimestamp = new Date();
+export const myMention = "@61467542295";
+
+export enum Groups {
+  BRZAdmin = "1389759544@g.us",
+}
 
 export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
   constructor(protected readonly interactions: Interaction[]) {
