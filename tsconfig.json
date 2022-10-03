@@ -24,6 +24,7 @@
       "paths": {
         "@whatsapp/*": ["src/whatsapp/*"],
         "@/*": ["src/*"],
+        "@main": ["main.ts"]
       }
     }
   }
