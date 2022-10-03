@@ -23,6 +23,7 @@
       "noFallthroughCasesInSwitch": true,
       "paths": {
         "@whatsapp/*": ["src/whatsapp/*"],
+        "@/*": ["src/*"],
       }
     }
   }

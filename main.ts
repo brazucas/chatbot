@@ -1,12 +1,19 @@
+import { SoundsInteraction } from "@/interactions/sounds.interaction";
+import { ChatbotClient } from "@/typings";
 import { WhatsappClient } from "@whatsapp/whatsapp.client";
 
-export interface ChatbotListener<T> {
-    onMessage(message: T): void;
-    initialize(): void;
-}
+const interactions = [new SoundsInteraction()];
 
-const providers: ChatbotListener<any>[] = [
-    new WhatsappClient(),
-]
+(async () => {
+  console.log("Initializing...");
 
-providers.forEach((provider) => provider.initialize());
+  const providers: ChatbotClient<any>[] = [new WhatsappClient(interactions)];
+
+  for (const provider of providers) {
+    await provider.initialize();
+  }
+
+  console.log(
+    `Loaded ${providers.length} providers and ${interactions.length} interactions`
+  );
+})();
