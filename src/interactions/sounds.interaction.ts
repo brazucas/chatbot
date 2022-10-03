@@ -11,7 +11,7 @@ import { audioBasePath } from "@/constants";
 export class SoundsInteraction extends Interaction {
   constructor() {
     super({
-      pattern: /^!sons( (\w.*))?/,
+      pattern: /^!sons( (\w.*))?$/,
     });
   }
 
