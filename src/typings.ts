@@ -10,12 +10,15 @@ export abstract class ChatbotClient<T> implements ChatbotClientInterface<T> {
     this._interactions = interactions;
   }
 
-  protected digestMessage(message: ChatMessage, rawMessage: T): void {
+  protected async digestMessage(
+    message: ChatMessage,
+    rawMessage: T
+  ): Promise<void> {
     if (process.env.DEBUG) {
       console.log(`Checking incoming message: ${message.body}`);
     }
 
-    this._interactions.forEach(async (interaction) => {
+    for (const interaction of this._interactions) {
       if (interaction.config.pattern.test(message.body)) {
         if (process.env.DEBUG) {
           console.log(`Digesting message: ${message.body}`);
@@ -23,13 +26,17 @@ export abstract class ChatbotClient<T> implements ChatbotClientInterface<T> {
 
         const response = await interaction.digestMessage(message);
 
+        if (process.env.DEBUG) {
+          console.log(`Response:`, response);
+        }
+
         await this.evaluateResponse(response, rawMessage);
       } else {
         if (process.env.DEBUG) {
           console.log(`Ignoring message: ${message.body}`);
         }
       }
-    });
+    }
   }
 
   async evaluateResponse(
