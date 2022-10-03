@@ -20,7 +20,7 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
     super(interactions);
   }
 
-  async initialize(): Promise<void> {
+  initialize(): Promise<void> {
     console.log("Initializing whatsapp client");
 
     const client = new Client({
@@ -82,37 +82,26 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
     { body, responseType }: ChatDigestResponse,
     rawMessage: WAWebJS.Message
   ): Promise<void> {
+    if (!body) {
+      return console.warn("No body provided for response");
+    }
+
+    let chat: WAWebJS.Chat;
     switch (responseType) {
       case InteractionResponseType.Reply:
-        if (body) {
-          await rawMessage.reply(body);
-        } else {
-          console.warn("No body provided for reply");
-        }
+        await rawMessage.reply(body);
         break;
       case InteractionResponseType.ReplyPrivately:
-        if (body) {
-          const contact = await rawMessage.getContact();
-          const chat = await contact.getChat();
-          chat.sendMessage(body);
-        } else {
-          console.warn("No body provided for reply");
-        }
+        const contact = await rawMessage.getContact();
+        chat = await contact.getChat();
+        chat.sendMessage(body);
         break;
       case InteractionResponseType.ChatMessage:
-        if (body) {
-          const chat = await rawMessage.getChat();
-          chat.sendMessage(body);
-        } else {
-          console.warn("No body provided for reply");
-        }
+        chat = await rawMessage.getChat();
+        chat.sendMessage(body);
         break;
       case InteractionResponseType.MediaAudio:
-        if (body) {
-          rawMessage.reply(MessageMedia.fromFilePath(body));
-        } else {
-          console.warn("No body provided for reply");
-        }
+        rawMessage.reply(MessageMedia.fromFilePath(body));
         break;
     }
   }
