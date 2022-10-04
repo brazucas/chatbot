@@ -26,6 +26,7 @@ jest.mock("qrcode-terminal", () => ({
 
 import { InteractionResponseType } from "@/typings";
 import { WhatsappClient } from "@whatsapp/whatsapp.client";
+import WAWebJS from "whatsapp-web.js";
 import { mockInitialize, MockInteraction, TestableApp } from "../helpers";
 
 describe("WhatsappClient Reply", () => {
@@ -69,6 +70,17 @@ describe("WhatsappClient Reply", () => {
       }),
       expect.anything()
     );
+  });
+
+  it("should fail evaluate response with no body", async () => {
+    spyClientEvaluateResponse.mockRestore();
+
+    const call = client.evaluateResponse(
+      { body: undefined, responseType: InteractionResponseType.Reply },
+      null as unknown as WAWebJS.Message
+    );
+
+    expect(call).rejects.toThrowError();
   });
 
   it("should reply to message", async () => {

@@ -7,7 +7,7 @@ import {
 } from "@/typings";
 
 export type TestableApp = {
-  sendMessage(message: string, rawMesssage?: any): Promise<void>;
+  sendMessage(message: string | null, rawMesssage?: any): Promise<void>;
 };
 
 export const mockInitialize = (
@@ -19,7 +19,7 @@ export const mockInitialize = (
     await client.initialize();
 
     return {
-      async sendMessage(message: string, rawMessage = { id: "123" }) {
+      async sendMessage(message: string | null, rawMessage = { id: "123" }) {
         await (client as any).digestMessage(
           {
             id: "123",
@@ -39,14 +39,14 @@ export const mockInitialize = (
 export class MockInteraction extends Interaction {
   constructor(protected readonly responseType: InteractionResponseType) {
     super({
-      pattern: /^test$/,
+      pattern: /^(test|no body)$/,
     });
   }
 
   async digestMessage({ body }: ChatMessage): Promise<ChatDigestResponse> {
     return {
       responseType: this.responseType,
-      body,
+      body: body === "no body" ? undefined : body,
     };
   }
 }

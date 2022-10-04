@@ -6,11 +6,13 @@ export class MockClient extends ChatbotClient<any> {
   }
 
   async initialize() {
-    console.log("MockClient initialized");
+    return;
   }
 
   async evaluateResponse(
     response: ChatDigestResponse,
     rawMessage: any
-  ): Promise<void> {}
+  ): Promise<void> {
+    return;
+  }
 }
