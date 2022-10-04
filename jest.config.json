@@ -15,20 +15,22 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
-        "chatbot/src/__tests__/helpers.ts",
-        "chatbot/src/__tests__/mock.client.ts",
+        "chatbot/tests/helpers.ts",
+        "chatbot/tests/mock.client.ts",
         "chatbot/src/audios.ts",
         "chatbot/.eslintrc.js",
         "chatbot/src/typings.ts",
-        "chatbot/src/constants.ts"
+        "chatbot/src/constants.ts",
+        "chatbot/main.ts"
     ],
     "coveragePathIgnorePatterns": [
-        "chatbot/src/__tests__/helpers.ts",
-        "chatbot/src/__tests__/mock.client.ts",
+        "chatbot/tests/helpers.ts",
+        "chatbot/tests/mock.client.ts",
         "chatbot/src/audios.ts",
         "chatbot/.eslintrc.js",
         "chatbot/src/typings.ts",
-        "chatbot/src/constants.ts"
+        "chatbot/src/constants.ts",
+        "chatbot/main.ts"
     ],
     "moduleNameMapper": {
         "^@whatsapp/(.*)$": [
