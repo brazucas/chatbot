@@ -1,9 +1,12 @@
-export interface ChatbotClientInterface<T> {
+export interface ChatbotClientInterface {
   initialize(): void;
-  evaluateResponse(response: ChatDigestResponse, rawMessage: T): Promise<void>;
+  evaluateResponse(
+    response: ChatDigestResponse,
+    rawMessage: any
+  ): Promise<void>;
 }
 
-export abstract class ChatbotClient<T> implements ChatbotClientInterface<T> {
+export abstract class ChatbotClient<T> implements ChatbotClientInterface {
   protected _interactions: Interaction[] = [];
 
   constructor(protected readonly interactions: Interaction[]) {
