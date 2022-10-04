@@ -1,12 +1,11 @@
+import { AUDIOS } from "@/audios";
+import { audioBasePath } from "@/constants";
 import {
   ChatDigestResponse,
   ChatMessage,
   Interaction,
   InteractionResponseType,
 } from "@/typings";
-import { AUDIOS } from "@/audios";
-import { Buttons } from "whatsapp-web.js";
-import { audioBasePath } from "@/constants";
 
 export class SoundsInteraction extends Interaction {
   constructor() {
@@ -28,14 +27,6 @@ export class SoundsInteraction extends Interaction {
     let [, , keyword] = command;
 
     if (!keyword) {
-      const buttons = new Buttons(
-        "Escolha um jagunço(a)",
-        Object.keys(AUDIOS).map((author) => ({
-          id: author,
-          body: author,
-        }))
-      );
-
       return {
         responseType: InteractionResponseType.Reply,
         body: "*Escolha um jagunço*\n\n" + Object.keys(AUDIOS).join("\n"),
@@ -50,8 +41,6 @@ export class SoundsInteraction extends Interaction {
     }
 
     if (!AUDIOS[keyword] && keyword.length >= 3) {
-      console.log("Sending all found audios");
-
       const search = Object.values(AUDIOS)
         .flat()
         .filter((audio) => audio.toLowerCase().includes(keyword.toLowerCase()));
@@ -74,8 +63,6 @@ export class SoundsInteraction extends Interaction {
             body: "Por enquanto só é suportado áudio em mp3, o gênio do German mandou esse arquivo em formato .wav",
           };
         } else {
-          console.log(`Sending audio: ${audioBasePath}${author}/${search[0]}`);
-
           return {
             responseType: InteractionResponseType.MediaAudio,
             body: `${audioBasePath}${author}/${search[0]}`,

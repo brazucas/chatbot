@@ -37,6 +37,10 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
       console.log("Client is ready!");
     });
 
+    client.on("disconnected", async () => {
+      console.log("Client disconnected!");
+    });
+
     client.on("auth_failure", (message) => {
       console.log("Auth failure", message);
     });
@@ -82,8 +86,9 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
     { body, responseType }: ChatDigestResponse,
     rawMessage: WAWebJS.Message
   ): Promise<void> {
+    console.log(">>>> body ", body);
     if (!body) {
-      return console.warn("No body provided for response");
+      throw new Error("Body is required");
     }
 
     let chat: WAWebJS.Chat;
