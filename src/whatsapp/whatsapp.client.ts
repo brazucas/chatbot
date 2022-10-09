@@ -86,7 +86,6 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
     { body, responseType }: ChatDigestResponse,
     rawMessage: WAWebJS.Message,
   ): Promise<void> {
-    console.log('>>>> body ', body);
     if (!body) {
       throw new Error('Body is required');
     }
@@ -108,6 +107,8 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
       case InteractionResponseType.MediaAudio:
         rawMessage.reply(MessageMedia.fromFilePath(body));
         break;
+      default:
+        throw new Error('Invalid response type');
     }
   }
 }
