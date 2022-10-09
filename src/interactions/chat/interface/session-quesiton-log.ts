@@ -1,5 +1,5 @@
-import { QuestionInterface } from "./question";
-import { SessionInterface } from "./session";
+import { QuestionInterface } from './question';
+import { SessionInterface } from './session';
 
 export interface SessionQuestionLogInterface {
   get id(): number;

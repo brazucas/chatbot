@@ -1,3 +1,3 @@
 export enum QuestionActionType {
-  HttpRequest = "HttpRequest",
+  HttpRequest = 'HttpRequest',
 }

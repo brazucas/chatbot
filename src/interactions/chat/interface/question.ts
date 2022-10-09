@@ -1,7 +1,7 @@
-import { QuestionActionInterface } from "./question-action";
-import { QuestionOptionInterface } from "./question-option";
-import { QuestionType } from "./question-type";
-import { SessionInterface } from "./session";
+import { QuestionActionInterface } from './question-action';
+import { QuestionOptionInterface } from './question-option';
+import { QuestionType } from './question-type';
+import { SessionInterface } from './session';
 
 export interface QuestionInterface {
   get id(): number;

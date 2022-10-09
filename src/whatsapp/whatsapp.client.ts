@@ -1,18 +1,18 @@
+import * as qrcode from 'qrcode-terminal';
+import WAWebJS, { Client, LocalAuth, MessageMedia } from 'whatsapp-web.js';
 import {
   ChatbotClient,
   ChatDigestResponse,
   Interaction,
   InteractionResponseType,
-} from "@/typings";
-import * as qrcode from "qrcode-terminal";
-import WAWebJS, { Client, LocalAuth, MessageMedia } from "whatsapp-web.js";
+} from '@/typings';
 
 const fiveMinutes = 300000;
 
-export const myMention = "@61467542295";
+export const myMention = '@61467542295';
 
 export enum Groups {
-  BRZAdmin = "1389759544@g.us",
+  BRZAdmin = '1389759544@g.us',
 }
 
 export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
@@ -21,7 +21,7 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
   }
 
   initialize(): Promise<void> {
-    console.log("Initializing whatsapp client");
+    console.log('Initializing whatsapp client');
 
     const client = new Client({
       authStrategy: new LocalAuth(),
@@ -31,51 +31,51 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
       },
     });
 
-    client.on("qr", (qr) => qrcode.generate(qr, { small: true }));
+    client.on('qr', (qr) => qrcode.generate(qr, { small: true }));
 
-    client.on("ready", async () => {
-      console.log("Client is ready!");
+    client.on('ready', async () => {
+      console.log('Client is ready!');
     });
 
-    client.on("disconnected", async () => {
-      console.log("Client disconnected!");
+    client.on('disconnected', async () => {
+      console.log('Client disconnected!');
     });
 
-    client.on("auth_failure", (message) => {
-      console.log("Auth failure", message);
+    client.on('auth_failure', (message) => {
+      console.log('Auth failure', message);
     });
 
-    client.on("authenticated", async () => {
-      console.log("authenticated");
+    client.on('authenticated', async () => {
+      console.log('authenticated');
     });
 
-    client.on("message_create", async (msg) => {
+    client.on('message_create', async (msg) => {
       if (msg.fromMe) {
         this.digestMessage(
           {
             id: msg.id._serialized,
             body: msg.body,
-            author: msg.author || "",
-            authorName: (await msg.getContact()).name || "",
+            author: msg.author || '',
+            authorName: (await msg.getContact()).name || '',
             chatId: msg.from,
             client: this,
           },
-          msg
+          msg,
         );
       }
     });
 
-    client.on("message", async (msg) => {
+    client.on('message', async (msg) => {
       this.digestMessage(
         {
           id: msg.id._serialized,
           body: msg.body,
-          author: msg.author || "",
-          authorName: (await msg.getContact()).name || "",
+          author: msg.author || '',
+          authorName: (await msg.getContact()).name || '',
           chatId: msg.from,
           client: this,
         },
-        msg
+        msg,
       );
     });
 
@@ -84,11 +84,11 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
 
   async evaluateResponse(
     { body, responseType }: ChatDigestResponse,
-    rawMessage: WAWebJS.Message
+    rawMessage: WAWebJS.Message,
   ): Promise<void> {
-    console.log(">>>> body ", body);
+    console.log('>>>> body ', body);
     if (!body) {
-      throw new Error("Body is required");
+      throw new Error('Body is required');
     }
 
     let chat: WAWebJS.Chat;

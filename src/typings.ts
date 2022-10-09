@@ -15,7 +15,7 @@ export abstract class ChatbotClient<T> implements ChatbotClientInterface {
 
   protected async digestMessage(
     message: ChatMessage,
-    rawMessage: T
+    rawMessage: T,
   ): Promise<void> {
     if (process.env.DEBUG) {
       console.log(`Checking incoming message: ${message.body}`);
@@ -30,28 +30,26 @@ export abstract class ChatbotClient<T> implements ChatbotClientInterface {
         const response = await interaction.digestMessage(message);
 
         if (process.env.DEBUG) {
-          console.log(`Response:`, response);
+          console.log('Response:', response);
         }
 
         await this.evaluateResponse(response, rawMessage);
-      } else {
-        if (process.env.DEBUG) {
-          console.log(`Ignoring message: ${message.body}`);
-        }
+      } else if (process.env.DEBUG) {
+        console.log(`Ignoring message: ${message.body}`);
       }
     }
   }
 
   async evaluateResponse(
     response: ChatDigestResponse,
-    rawMessage: T
+    rawMessage: T,
   ): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   initialize(): Promise<void> {
     throw new Error(
-      `Client won't be initialized since method is not implemented.`
+      'Client won\'t be initialized since method is not implemented.',
     );
   }
 }
@@ -96,7 +94,7 @@ export abstract class Interaction implements InteractionInterface {
 
   digestMessage(message: ChatMessage): Promise<ChatDigestResponse> {
     throw new Error(
-      `Message ${message} won't be digested since method is not implemented.`
+      `Message ${message} won't be digested since method is not implemented.`,
     );
   }
 }

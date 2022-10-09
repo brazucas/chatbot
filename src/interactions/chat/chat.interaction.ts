@@ -1,4 +1,4 @@
-import { ChatDigestResponse, ChatMessage, Interaction } from "@/typings";
+import { ChatDigestResponse, ChatMessage, Interaction } from '@/typings';
 
 export class ChatInteraction extends Interaction {
   constructor() {
@@ -8,6 +8,6 @@ export class ChatInteraction extends Interaction {
   }
 
   async digestMessage({ body }: ChatMessage): Promise<ChatDigestResponse> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }

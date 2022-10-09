@@ -1,7 +1,7 @@
-import { QuestionInterface } from "./question";
-import { QuestionCustomerAnswerInterface } from "./question-customer-answer";
-import { SessionQuestionLogInterface } from "./session-quesiton-log";
-import { SessionStatus } from "./session-status";
+import { QuestionInterface } from './question';
+import { QuestionCustomerAnswerInterface } from './question-customer-answer';
+import { SessionQuestionLogInterface } from './session-quesiton-log';
+import { SessionStatus } from './session-status';
 
 export interface SessionInterface {
   get id(): number;
