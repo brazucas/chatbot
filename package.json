@@ -38,7 +38,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "yarn lint --fix",
-      "pre-push": "yarn test-coverage"
+      "pre-push": "yarn test:cov"
     }
   }
 }
