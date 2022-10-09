@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum SessionStatus {
+  ACTIVE
+  COMPLETED_IDLE
+  COMPLETED_FLOW
+  COMPLETED_USER
+}
+
+model Session {
+  id                Int                     @id @default(autoincrement())
+  lastInteraction   DateTime                @default(now())
+  status            SessionStatus           @default(ACTIVE)
+  customer          String                  @db.VarChar(128)
+  currentQuestion   Question                @relation(fields: [currentQuestionId], references: [id])
+  currentQuestionId Int
+  createdAt         DateTime                @default(now())
+  trigger           SessionTrigger          @relation(fields: [triggerId], references: [id])
+  triggerId         Int
+  customerAnswers   SessionCustomerAnswer[]
+  questionLogs      SessionQuestionLog[]
+}
+
+model SessionTrigger {
+  id                Int       @id @default(autoincrement())
+  message           String    @db.VarChar(128)
+  isPartial         Boolean
+  createdAt         DateTime  @default(now())
+  isActive          Boolean   @default(true)
+  sessionsTriggered Session[]
+}
+
+enum QuestionType {
+  Multiple
+  Single
+  FreeText
+}
+
+model Question {
+  id              Int                     @id @default(autoincrement())
+  title           String                  @db.VarChar(128)
+  type            QuestionType
+  isActive        Boolean                 @default(true)
+  createdAt       DateTime                @default(now())
+  parent          Question?               @relation("QuestionToQuestion", fields: [parentId], references: [id])
+  parentId        Int?
+  options         QuestionOption[]
+  customerAnswers SessionCustomerAnswer[]
+  actions         QuestionAction[]
+  sessionLogs     SessionQuestionLog[]
+  sessions        Session[]
+  questions       Question[]              @relation("QuestionToQuestion")
+}
+
+model QuestionOption {
+  id              Int                     @id @default(autoincrement())
+  title           String                  @db.VarChar(128)
+  isActive        Boolean                 @default(true)
+  createdAt       DateTime                @default(now())
+  question        Question                @relation(fields: [questionId], references: [id])
+  questionId      Int
+  customerAnswers SessionCustomerAnswer[]
+}
+
+model SessionCustomerAnswer {
+  id         Int             @id @default(autoincrement())
+  createdAt  DateTime        @default(now())
+  question   Question        @relation(fields: [questionId], references: [id])
+  questionId Int
+  session    Session         @relation(fields: [sessionId], references: [id])
+  sessionId  Int
+  option     QuestionOption? @relation(fields: [optionId], references: [id])
+  optionId   Int?
+  text       String?         @db.VarChar(128)
+}
+
+enum QuestionActionType {
+  HttpRequest
+}
+
+enum QuestionActionMethod {
+  GET
+  POST
+  PUT
+  DELETE
+}
+
+model QuestionAction {
+  id             Int                   @id @default(autoincrement())
+  title          String                @db.VarChar(128)
+  type           QuestionActionType
+  isActive       Boolean               @default(true)
+  createdAt      DateTime              @default(now())
+  question       Question              @relation(fields: [questionId], references: [id])
+  questionId     Int
+  requestUrl     String?               @db.VarChar(128)
+  requestMethod  QuestionActionMethod?
+  requestHeaders Json?
+  requestPayload Json?
+}
+
+model SessionQuestionLog {
+  id                  Int      @id @default(autoincrement())
+  createdAt           DateTime @default(now())
+  question            Question @relation(fields: [questionId], references: [id])
+  questionId          Int
+  session             Session  @relation(fields: [sessionId], references: [id])
+  sessionId           Int
+  httpRequestUrl      String?  @db.VarChar(128)
+  httpResponseCode    Int?
+  httpResponseBody    String?  @db.LongText
+  httpResponseHeaders String?  @db.LongText
+}
