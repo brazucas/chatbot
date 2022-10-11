@@ -1,10 +1,11 @@
-import { QuestionInterface } from './question';
-import { QuestionCustomerAnswerInterface } from './question-customer-answer';
-import { SessionQuestionLogInterface } from './session-quesiton-log';
-import { SessionStatus } from './session-status';
+import { QuestionInterface } from "./question.interface";
+import { QuestionCustomerAnswerInterface } from "./question-customer-answer.interface";
+import { SessionQuestionLogInterface } from "./session-quesiton-log.interface";
+import { SessionStatus } from "./session-status.enum";
 
 export interface SessionInterface {
   get id(): number;
+  get chatId(): string;
   get lastInteraction(): Date;
   get status(): SessionStatus;
   get currentQuestion(): QuestionInterface;

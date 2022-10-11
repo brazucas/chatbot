@@ -1,6 +1,6 @@
-import { QuestionInterface } from './question';
-import { QuestionOptionInterface } from './question-option';
-import { SessionInterface } from './session';
+import { QuestionInterface } from "./question.interface";
+import { QuestionOptionInterface } from "./question-option.interface";
+import { SessionInterface } from "./session.interface";
 
 export interface QuestionCustomerAnswerInterface {
   get id(): number;

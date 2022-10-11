@@ -1,6 +1,6 @@
-import { QuestionActionType } from '@prisma/client';
-import { QuestionInterface } from './question';
-import { RequestMethod } from './request-method';
+import { QuestionActionType } from "@prisma/client";
+import { QuestionInterface } from "./question.interface";
+import { RequestMethod } from "./request-method.enum";
 
 export interface QuestionActionInterface {
   get id(): number;
