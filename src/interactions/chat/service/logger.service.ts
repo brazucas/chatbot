@@ -1,4 +1,4 @@
-import winston, { Logger } from 'winston';
+import winston, { Logger, transports } from 'winston';
 
 export default class LoggerService {
   static instance: LoggerService;
@@ -19,6 +19,16 @@ export default class LoggerService {
       logger.add(new winston.transports.Console({
         format: winston.format.simple(),
       }));
+    }
+
+    if (process.env.USE_DATADOG) {
+      const httpTransportOptions = {
+        host: 'http-intake.logs.datadoghq.com',
+        path: `/api/v2/logs?dd-api-key=${process.env.DATADOG_API_KEY as string}&ddsource=nodejs&service=chatbot`,
+        ssl: true,
+      };
+
+      logger.add(new transports.Http(httpTransportOptions));
     }
 
     this.logger$ = logger;
