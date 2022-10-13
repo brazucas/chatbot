@@ -1,3 +1,4 @@
+import LoggerService from '@src/interactions/chat/service/logger.service';
 import {
   ChatbotClientInterface, ChatDigestResponse, ChatMessage, Interaction,
 } from '@src/typings';
@@ -11,24 +12,24 @@ export default abstract class ChatbotClient<T> implements ChatbotClientInterface
     rawMessage: T,
   ): Promise<void> {
     if (process.env.DEBUG) {
-      console.log(`Checking incoming message: ${message.body}`);
+      LoggerService.logger().warn(`Checking incoming message: ${message.body}`);
     }
 
     this.interactions.forEach(async (interaction) => {
       if (interaction.config.pattern.test(message.body)) {
         if (process.env.DEBUG) {
-          console.log(`Digesting message: ${message.body}`);
+          LoggerService.logger().warn(`Digesting message: ${message.body}`);
         }
 
         const response = await interaction.digestMessage(message);
 
         if (process.env.DEBUG) {
-          console.log('Response:', response);
+          LoggerService.logger().warn('Response:', response);
         }
 
         await this.evaluateResponse(response, rawMessage);
       } else if (process.env.DEBUG) {
-        console.log(`Ignoring message: ${message.body}`);
+        LoggerService.logger().warn(`Ignoring message: ${message.body}`);
       }
     });
   }

@@ -6,6 +6,7 @@ import {
   InteractionResponseType,
 } from '@src/typings';
 import ChatbotClient from '@src/interface/chatbot-client.abstract';
+import LoggerService from '@src/interactions/chat/service/logger.service';
 
 const fiveMinutes = 300000;
 
@@ -21,7 +22,7 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
   }
 
   initialize(): Promise<void> {
-    console.log('Initializing whatsapp client');
+    LoggerService.logger().warn('Initializing whatsapp client');
 
     const client = new Client({
       authStrategy: new LocalAuth(),
@@ -34,19 +35,19 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
     client.on('qr', (qr) => qrcode.generate(qr, { small: true }));
 
     client.on('ready', async () => {
-      console.log('Client is ready!');
+      LoggerService.logger().warn('Client is ready!');
     });
 
     client.on('disconnected', async () => {
-      console.log('Client disconnected!');
+      LoggerService.logger().warn('Client disconnected!');
     });
 
     client.on('auth_failure', (message) => {
-      console.log('Auth failure', message);
+      LoggerService.logger().warn('Auth failure', message);
     });
 
     client.on('authenticated', async () => {
-      console.log('authenticated');
+      LoggerService.logger().warn('authenticated');
     });
 
     client.on('message_create', async (msg) => {

@@ -1,13 +1,14 @@
+import LoggerService from './interactions/chat/service/logger.service';
 import ChatbotClient from './interface/chatbot-client.abstract';
 
 const bootstrap = async (clients: ChatbotClient<any>[]) => {
-  console.log('Initializing...');
+  LoggerService.logger().warn('Initializing...');
 
   clients.forEach((client) => {
     client.initialize();
   });
 
-  return console.log(`Loaded ${clients.length} providers`);
+  return LoggerService.logger().warn(`Loaded ${clients.length} providers`);
 };
 
 export default bootstrap;
