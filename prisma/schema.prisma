@@ -20,6 +20,7 @@ enum SessionStatus {
 
 model Session {
   id                Int                     @id @default(autoincrement())
+  chatId            String
   lastInteraction   DateTime                @default(now())
   status            SessionStatus           @default(ACTIVE)
   customer          String                  @db.VarChar(128)

@@ -1,13 +1,13 @@
-import { AUDIOS } from '@/audios';
-import { audioBasePath } from '@/constants';
+import AUDIOS from '@src/audios';
+import audioBasePath from '@src/constants';
 import {
   ChatDigestResponse,
   ChatMessage,
   Interaction,
   InteractionResponseType,
-} from '@/typings';
+} from '@src/typings';
 
-export class SoundsInteraction extends Interaction {
+export default class SoundsInteraction extends Interaction {
   constructor() {
     super({
       pattern: /^!sons( (\w.*))?$/,
@@ -51,7 +51,9 @@ export class SoundsInteraction extends Interaction {
           body: `*Escolha um áudio*\n\n${search.join('\n')}`,
         };
       } if (search.length === 1) {
-        const author = Object.keys(AUDIOS).find((author) => AUDIOS[author].find((audio) => audio === search[0]));
+        const author = Object.keys(AUDIOS).find(
+          (author2) => AUDIOS[author2].find((audio) => audio === search[0]),
+        );
 
         const audioPath = `${audioBasePath}${author}/${search[0]}`;
 

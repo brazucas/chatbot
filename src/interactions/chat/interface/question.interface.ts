@@ -1,7 +1,8 @@
-import { QuestionActionInterface } from "./question-action.interface";
-import { QuestionOptionInterface } from "./question-option.interface";
-import { QuestionType } from "./question-type.enum";
-import { SessionInterface } from "./session.interface";
+import { QuestionActionInterface } from './question-action.interface';
+import { QuestionOptionInterface } from './question-option.interface';
+import QuestionType from './question-type.enum';
+// eslint-disable-next-line
+import { SessionInterface } from './session.interface';
 
 export interface QuestionInterface {
   get id(): number;

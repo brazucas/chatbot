@@ -1,4 +1,4 @@
-export const AUDIOS: {
+const AUDIOS: {
   [key in string]: string[];
 } = {
   CHUUNAS: [
@@ -959,3 +959,5 @@ export const AUDIOS: {
     'ok gorn.mp3',
   ],
 };
+
+export default AUDIOS;

@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-export class PrismaService extends PrismaClient {
+export default class PrismaService extends PrismaClient {
   private static instance: PrismaService;
 
   public static getInstance(): PrismaService {
@@ -15,8 +15,8 @@ export class PrismaService extends PrismaClient {
     super({
       log: [
         {
-          emit: "event",
-          level: "query",
+          emit: 'event',
+          level: 'query',
         },
       ],
     });

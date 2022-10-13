@@ -1,18 +1,13 @@
-import { ChatbotClient, ChatDigestResponse, Interaction } from "@/typings";
+import ChatbotClient from '@src/interface/chatbot-client.abstract';
 
-export class MockClient extends ChatbotClient<any> {
-  constructor(interactions: Interaction[]) {
-    super(interactions);
-  }
-
+export default class MockClient extends ChatbotClient<any> {
+  // eslint-disable-next-line
   async initialize() {
-    return;
+
   }
 
-  async evaluateResponse(
-    response: ChatDigestResponse,
-    rawMessage: any
-  ): Promise<void> {
-    return;
+  // eslint-disable-next-line
+  async evaluateResponse(): Promise<void> {
+
   }
 }

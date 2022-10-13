@@ -1,12 +1,12 @@
-import { ServiceInterface } from "@/interactions/chat/interface/service.interface";
-import { SessionInterface } from "@/interactions/chat/interface/session.interface";
-import { SessionServiceInterface } from "../interface/session-service.interface";
+import { SessionInterface } from '@src/interactions/chat/interface/session.interface';
+import ServiceInterface from '../interface/service.interface';
+import { SessionServiceInterface } from '../interface/session-service.interface';
 
-export class SessionService
+export default class SessionService
   extends ServiceInterface
-  implements SessionServiceInterface
-{
+  implements SessionServiceInterface {
   private static instance: SessionService;
+
   private constructor() {
     super();
   }
@@ -18,7 +18,8 @@ export class SessionService
     return SessionService.instance;
   }
 
+  // eslint-disable-next-line
   public async create(chatId: string): Promise<SessionInterface> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }

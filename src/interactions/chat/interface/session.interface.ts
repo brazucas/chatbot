@@ -1,7 +1,9 @@
-import { QuestionInterface } from "./question.interface";
-import { QuestionCustomerAnswerInterface } from "./question-customer-answer.interface";
-import { SessionQuestionLogInterface } from "./session-quesiton-log.interface";
-import { SessionStatus } from "./session-status.enum";
+// eslint-disable-next-line
+import { QuestionCustomerAnswerInterface } from './question-customer-answer.interface';
+// eslint-disable-next-line
+import { QuestionInterface } from './question.interface';
+import { SessionQuestionLogInterface } from './session-quesiton-log.interface';
+import SessionStatus from './session-status.enum';
 
 export interface SessionInterface {
   get id(): number;

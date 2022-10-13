@@ -1,13 +1,13 @@
-import { ServiceInterface } from "@/interactions/chat/interface/service.interface";
-import { SessionInterface } from "@/interactions/chat/interface/session.interface";
-import { QuestionServiceInterface } from "../interface/question-service.interface";
-import { QuestionInterface } from "../interface/question.interface";
+import { QuestionServiceInterface } from '../interface/question-service.interface';
+import { QuestionInterface } from '../interface/question.interface';
+import ServiceInterface from '../interface/service.interface';
+import { SessionInterface } from '../interface/session.interface';
 
-export class QuestionService
+export default class QuestionService
   extends ServiceInterface
-  implements QuestionServiceInterface
-{
+  implements QuestionServiceInterface {
   private static instance: QuestionService;
+
   private constructor() {
     super();
   }
@@ -19,9 +19,10 @@ export class QuestionService
     return QuestionService.instance;
   }
 
+  // eslint-disable-next-line
   public async findFirst(
-    session: SessionInterface
+    session: SessionInterface, // eslint-disable-line
   ): Promise<QuestionInterface> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }

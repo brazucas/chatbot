@@ -1,11 +1,11 @@
 import * as qrcode from 'qrcode-terminal';
 import WAWebJS, { Client, LocalAuth, MessageMedia } from 'whatsapp-web.js';
 import {
-  ChatbotClient,
   ChatDigestResponse,
   Interaction,
   InteractionResponseType,
-} from '@/typings';
+} from '@src/typings';
+import ChatbotClient from '@src/interface/chatbot-client.abstract';
 
 const fiveMinutes = 300000;
 
@@ -53,6 +53,7 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
       if (msg.fromMe) {
         this.digestMessage(
           {
+            // eslint-disable-next-line no-underscore-dangle
             id: msg.id._serialized,
             body: msg.body,
             author: msg.author || '',
@@ -68,6 +69,7 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
     client.on('message', async (msg) => {
       this.digestMessage(
         {
+          // eslint-disable-next-line no-underscore-dangle
           id: msg.id._serialized,
           body: msg.body,
           author: msg.author || '',
@@ -82,7 +84,7 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
     return client.initialize();
   }
 
-  async evaluateResponse(
+  static async evaluateResponse(
     { body, responseType }: ChatDigestResponse,
     rawMessage: WAWebJS.Message,
   ): Promise<void> {
@@ -91,12 +93,14 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
     }
 
     let chat: WAWebJS.Chat;
+    let contact: WAWebJS.Contact;
+
     switch (responseType) {
       case InteractionResponseType.Reply:
         await rawMessage.reply(body);
         break;
       case InteractionResponseType.ReplyPrivately:
-        const contact = await rawMessage.getContact();
+        contact = await rawMessage.getContact();
         chat = await contact.getChat();
         chat.sendMessage(body);
         break;

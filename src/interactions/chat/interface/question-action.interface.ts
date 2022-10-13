@@ -1,6 +1,5 @@
-import { QuestionActionType } from "@prisma/client";
-import { QuestionInterface } from "./question.interface";
-import { RequestMethod } from "./request-method.enum";
+import { QuestionActionType } from '@prisma/client';
+import RequestMethod from './request-method.enum';
 
 export interface QuestionActionInterface {
   get id(): number;
@@ -8,7 +7,6 @@ export interface QuestionActionInterface {
   get type(): QuestionActionType;
   get isActive(): boolean;
   get createdAt(): Date;
-  get question(): QuestionInterface;
   get requestUrl(): string | null;
   get requestMethod(): RequestMethod | null;
   get requestHeaders(): { [key in string]: string } | null;

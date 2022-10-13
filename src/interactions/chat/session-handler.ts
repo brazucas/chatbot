@@ -1,85 +1,74 @@
-import { QuestionInterface } from "./interface/question.interface";
-import { QuestionCustomerAnswerInterface } from "./interface/question-customer-answer.interface";
-import { SessionInterface } from "./interface/session.interface";
-import { SessionQuestionLogInterface } from "./interface/session-quesiton-log.interface";
-import { SessionStatus } from "./interface/session-status.enum";
+import { QuestionInterface } from './interface/question.interface';
+import { QuestionCustomerAnswerInterface } from './interface/question-customer-answer.interface';
+import { SessionInterface } from './interface/session.interface';
+import { SessionQuestionLogInterface } from './interface/session-quesiton-log.interface';
+import SessionStatus from './interface/session-status.enum';
 
-export class SessionHandler implements SessionInterface {
-  private _id: number;
-  private _lastInteraction: Date;
-  private _status: SessionStatus;
-  private _currentQuestion: QuestionInterface;
-  private _isBusy: boolean;
-  private _chatId: string;
-
-  constructor({
-    id,
-    chatId,
-    status,
-    currentQuestion,
-    isBusy,
-  }: SessionInterface) {
-    this._id = id;
-    this._chatId = chatId;
-    this._lastInteraction = new Date();
-    this._status = status;
-    this._currentQuestion = currentQuestion;
-    this._isBusy = isBusy;
+export default class SessionHandler implements SessionInterface {
+  constructor(protected readonly session: SessionInterface) {
   }
 
   get id() {
-    return this._id;
+    return this.session.id;
   }
 
   get chatId() {
-    return this._chatId;
+    return this.session.chatId;
   }
 
   get lastInteraction() {
-    return this._lastInteraction;
+    return this.session.lastInteraction;
   }
 
   get status() {
-    return this._status;
+    return this.session.status;
   }
 
   get currentQuestion() {
-    return this._currentQuestion;
+    return this.session.currentQuestion;
   }
 
   get isBusy() {
-    return this._isBusy;
+    return this.session.isBusy;
   }
 
+  // eslint-disable-next-line
   setLastInteraction(timestamp: Date): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
+  // eslint-disable-next-line
   storeAnswer(answer: string): Promise<QuestionCustomerAnswerInterface> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
+  // eslint-disable-next-line
   setStatus(status: SessionStatus): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
+  // eslint-disable-next-line
   triggerQuestionActions(): Promise<SessionQuestionLogInterface[]> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
+  // eslint-disable-next-line
   nextQuestion(): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
+  // eslint-disable-next-line
   previousQuestion(): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
+  // eslint-disable-next-line
   skipToQuestion(question: QuestionInterface): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
+  // eslint-disable-next-line
   setIsBusy(isBusy: boolean): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }

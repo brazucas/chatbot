@@ -1,4 +1,4 @@
-import { SessionInterface } from "./session.interface";
+import { SessionInterface } from './session.interface';
 
 export interface SessionTriggerInterface {
   get id(): number;

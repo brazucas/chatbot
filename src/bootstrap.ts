@@ -1,11 +1,13 @@
-import { ChatbotClient } from './typings';
+import ChatbotClient from './interface/chatbot-client.abstract';
 
-export const bootstrap = async (clients: ChatbotClient<any>[]) => {
+const bootstrap = async (clients: ChatbotClient<any>[]) => {
   console.log('Initializing...');
 
-  for (const client of clients) {
-    await client.initialize();
-  }
+  clients.forEach((client) => {
+    client.initialize();
+  });
 
   return console.log(`Loaded ${clients.length} providers`);
 };
+
+export default bootstrap;
