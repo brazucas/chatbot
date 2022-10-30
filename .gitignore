@@ -4,3 +4,6 @@ node_modules
 .vscode
 .env*
 !.env.dist
+
+.cicd/instancekey.pub
+/brzchatbot_image.tgz

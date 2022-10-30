@@ -27,8 +27,10 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
     const client = new Client({
       authStrategy: new LocalAuth(),
       authTimeoutMs: fiveMinutes,
+      takeoverTimeoutMs: fiveMinutes,
       puppeteer: {
         timeout: fiveMinutes,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
       },
     });
 
@@ -85,7 +87,8 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
     return client.initialize();
   }
 
-  static async evaluateResponse(
+  // eslint-disable-next-line class-methods-use-this
+  async evaluateResponse(
     { body, responseType }: ChatDigestResponse,
     rawMessage: WAWebJS.Message,
   ): Promise<void> {
