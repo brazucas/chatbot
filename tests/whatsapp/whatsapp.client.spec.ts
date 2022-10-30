@@ -1,6 +1,6 @@
-import { InteractionResponseType } from '@src/typings';
 import { WhatsappClient } from '@whatsapp/whatsapp.client';
 import WAWebJS from 'whatsapp-web.js';
+import { InteractionResponseType } from '@src/typings';
 import { mockInitialize, MockInteraction, TestableApp } from '../helpers';
 
 jest.mock('whatsapp-web.js', () => ({

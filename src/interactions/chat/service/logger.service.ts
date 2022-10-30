@@ -1,4 +1,5 @@
-import winston, { Logger, transports } from 'winston';
+import { Logger, transports } from 'winston';
+import * as winston from 'winston';
 
 export default class LoggerService {
   static instance: LoggerService;

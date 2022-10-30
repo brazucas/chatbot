@@ -1,11 +1,11 @@
-import AUDIOS from '@src/audios';
-import audioBasePath from '@src/constants';
 import {
   ChatDigestResponse,
   ChatMessage,
   Interaction,
   InteractionResponseType,
 } from '@src/typings';
+import AUDIOS from '@src/audios';
+import audioBasePath from '@src/constants';
 
 export default class SoundsInteraction extends Interaction {
   constructor() {
