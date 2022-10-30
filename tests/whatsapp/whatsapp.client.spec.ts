@@ -109,6 +109,7 @@ describe('WhatsappClient Reply', () => {
 
 describe('WhatsappClient reply privately', () => {
   let chatbot: TestableApp;
+  
   const client = new WhatsappClient([
     new MockInteraction(InteractionResponseType.ReplyPrivately),
   ]);

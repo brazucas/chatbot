@@ -15,7 +15,8 @@ export default abstract class ChatbotClient<T> implements ChatbotClientInterface
       LoggerService.logger().warn(`Checking incoming message: ${message.body}`);
     }
 
-    this.interactions.forEach(async (interaction) => {
+    // eslint-disable-next-line
+    for await (const interaction of this.interactions) {
       if (interaction.config.pattern.test(message.body)) {
         if (process.env.DEBUG) {
           LoggerService.logger().warn(`Digesting message: ${message.body}`);
@@ -27,11 +28,11 @@ export default abstract class ChatbotClient<T> implements ChatbotClientInterface
           LoggerService.logger().warn('Response:', response);
         }
 
-        await this.evaluateResponse(response, rawMessage);
+        this.evaluateResponse(response, rawMessage);
       } else if (process.env.DEBUG) {
         LoggerService.logger().warn(`Ignoring message: ${message.body}`);
       }
-    });
+    }
   }
 
   // eslint-disable-next-line

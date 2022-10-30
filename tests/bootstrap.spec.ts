@@ -1,5 +1,5 @@
-import { bootstrap } from '@src/bootstrap';
-import { MockClient } from './mock.client';
+import bootstrap from '@src/bootstrap';
+import MockClient from './mock.client';
 
 describe('main', () => {
   const clients = [new MockClient([])];

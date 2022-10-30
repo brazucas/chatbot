@@ -1,13 +1,13 @@
-import MockClient from 'tests/mock.client';
 import audioBasePath from '@src/constants';
 import SoundsInteraction from '@src/interactions/sounds.interaction';
 import ChatbotClient from '@src/interface/chatbot-client.abstract';
 import { InteractionResponseType } from '@src/typings';
+import MockClient from '../mock.client';
 import { mockInitialize, TestableApp } from '../helpers';
 
 jest.mock('@src/audios', () => ({
   __esModule: true,
-  AUDIOS: {
+  default: {
     CHUUNAS: [
       'tomar vicvaporube chunas.wav',
       'AAAI MDS CHUNAS.wav',

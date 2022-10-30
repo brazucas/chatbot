@@ -1,5 +1,5 @@
+import ChatbotClient from '@src/interface/chatbot-client.abstract';
 import {
-  ChatbotClient,
   ChatDigestResponse,
   ChatMessage,
   Interaction,
@@ -18,8 +18,8 @@ export const mockInitialize = (
   await client.initialize();
 
   return {
-    async sendMessage(message: string | null, rawMessage = { id: '123' }) {
-      await (client as any).digestMessage(
+    sendMessage(message: string | null, rawMessage = { id: '123' }) {
+      return (client as any).digestMessage(
         {
           id: '123',
           body: message,
