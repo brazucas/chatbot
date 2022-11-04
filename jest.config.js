@@ -7,7 +7,7 @@ module.exports = {
     'json',
     'ts',
   ],
-  testRegex: '.*\\.spec\\.ts$',
+  testRegex: '.*\\.test\\.ts$',
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
