@@ -1,11 +1,18 @@
-import { QuestionInterface } from './interface/question.interface';
+import { Prisma } from '@prisma/client';
 import { QuestionCustomerAnswerInterface } from './interface/question-customer-answer.interface';
-import { SessionInterface } from './interface/session.interface';
+import { QuestionInterface } from './interface/question.interface';
 import { SessionQuestionLogInterface } from './interface/session-quesiton-log.interface';
 import SessionStatus from './interface/session-status.enum';
+import { SessionInterface } from './interface/session.interface';
 
+export const checkoutSessionRelations = Prisma.validator<Prisma.SessionArgs>()({
+  include: {
+    currentQuestion: true,
+  },
+});
 export default class SessionHandler implements SessionInterface {
-  constructor(protected readonly session: SessionInterface) {
+  constructor(protected readonly session:
+  Prisma.SessionGetPayload<typeof checkoutSessionRelations>) {
   }
 
   get id() {
@@ -21,15 +28,15 @@ export default class SessionHandler implements SessionInterface {
   }
 
   get status() {
-    return this.session.status;
+    return this.session.status as SessionStatus;
   }
 
   get currentQuestion() {
-    return this.session.currentQuestion;
+    return this.session.currentQuestion as unknown as QuestionInterface;
   }
 
   get isBusy() {
-    return this.session.isBusy;
+    return this.session.id === 1;
   }
 
   // eslint-disable-next-line
