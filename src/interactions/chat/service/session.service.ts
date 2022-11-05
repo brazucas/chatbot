@@ -1,6 +1,8 @@
-import { SessionInterface } from '@src/interactions/chat/interface/session.interface';
+import { Session } from '@prisma/client';
+import { SessionHandlerInterface } from '@src/interactions/chat/interface/session-handler.interface';
 import ServiceInterface from '../interface/service.interface';
 import { SessionServiceInterface } from '../interface/session-service.interface';
+import SessionHandler from '../session-handler';
 
 export default class SessionService
   extends ServiceInterface
@@ -19,7 +21,17 @@ export default class SessionService
   }
 
   // eslint-disable-next-line
-  public async create(chatId: string): Promise<SessionInterface> {
+  public async create(chatId: string): Promise<SessionHandlerInterface> {
+    throw new Error('Method not implemented.');
+  }
+
+  // eslint-disable-next-line
+  public async find(chatId: string): Promise<SessionHandlerInterface> {
+    throw new Error('Method not implemented.');
+  }
+
+  // eslint-disable-next-line
+  public async buildSessionHandler(session: Session): Promise<SessionHandler> {
     throw new Error('Method not implemented.');
   }
 }

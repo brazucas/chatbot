@@ -1,4 +1,4 @@
-import { SessionInterface } from './session.interface';
+import { SessionHandlerInterface } from './session-handler.interface';
 
 export interface SessionTriggerInterface {
   get id(): number;
@@ -7,6 +7,6 @@ export interface SessionTriggerInterface {
   get createdAt(): Date;
   get isActive(): boolean;
 
-  getSessionsTriggered(): Promise<SessionInterface[]>;
+  getSessionsTriggered(): Promise<SessionHandlerInterface[]>;
   triggerForMessage(message: string): Promise<boolean>;
 }

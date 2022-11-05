@@ -1,9 +1,9 @@
 import { ChatDigestResponse, ChatMessage, Interaction } from '@src/typings';
-import { SessionInterface } from './interface/session.interface';
+import { SessionHandlerInterface } from './interface/session-handler.interface';
 import SessionService from './service/session.service';
 
 export default class ChatInteraction extends Interaction {
-  private sessions: SessionInterface[] = [];
+  private sessions: SessionHandlerInterface[] = [];
 
   constructor() {
     super({

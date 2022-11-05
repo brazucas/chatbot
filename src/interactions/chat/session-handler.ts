@@ -3,16 +3,16 @@ import { QuestionCustomerAnswerInterface } from './interface/question-customer-a
 import { QuestionInterface } from './interface/question.interface';
 import { SessionQuestionLogInterface } from './interface/session-quesiton-log.interface';
 import SessionStatus from './interface/session-status.enum';
-import { SessionInterface } from './interface/session.interface';
+import { SessionHandlerInterface } from './interface/session-handler.interface';
 
-export const checkoutSessionRelations = Prisma.validator<Prisma.SessionArgs>()({
+export const sessionRelations = Prisma.validator<Prisma.SessionArgs>()({
   include: {
     currentQuestion: true,
   },
 });
-export default class SessionHandler implements SessionInterface {
+export default class SessionHandler implements SessionHandlerInterface {
   constructor(protected readonly session:
-  Prisma.SessionGetPayload<typeof checkoutSessionRelations>) {
+  Prisma.SessionGetPayload<typeof sessionRelations>) {
   }
 
   get id() {

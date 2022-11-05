@@ -1,7 +1,7 @@
 import { QuestionServiceInterface } from '../interface/question-service.interface';
 import { QuestionInterface } from '../interface/question.interface';
 import ServiceInterface from '../interface/service.interface';
-import { SessionInterface } from '../interface/session.interface';
+import { SessionHandlerInterface } from '../interface/session-handler.interface';
 
 export default class QuestionService
   extends ServiceInterface
@@ -21,7 +21,7 @@ export default class QuestionService
 
   // eslint-disable-next-line
   public async findFirst(
-    session: SessionInterface, // eslint-disable-line
+    session: SessionHandlerInterface, // eslint-disable-line
   ): Promise<QuestionInterface> {
     throw new Error('Method not implemented.');
   }
