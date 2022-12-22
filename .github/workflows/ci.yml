@@ -8,6 +8,7 @@ on:
       - tests/**
       - '*.json'
       - yarn.lock
+      - .github/**
   pull_request:
     paths:
       - '!*.MD'

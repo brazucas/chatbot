@@ -1,5 +1,5 @@
 # build stage
-FROM node:lts-slim
+FROM node:16-slim
 
 ENV NODE_ENV build
 
