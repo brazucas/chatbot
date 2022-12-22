@@ -6,5 +6,6 @@ import { SessionHandlerInterface } from './session-handler.interface';
 export interface SessionServiceInterface extends ServiceInterface {
   create(chatId: string): Promise<SessionHandlerInterface>;
   find(chatId: string): Promise<SessionHandlerInterface>;
+  findAll(): Promise<SessionHandlerInterface[]>;
   buildSessionHandler(session: Session): Promise<SessionHandler>;
 }

@@ -9,7 +9,7 @@ export default class SessionService
   implements SessionServiceInterface {
   private static instance: SessionService;
 
-  private constructor() {
+  public constructor() {
     super();
   }
 
@@ -27,6 +27,11 @@ export default class SessionService
 
   // eslint-disable-next-line
   public async find(chatId: string): Promise<SessionHandlerInterface> {
+    throw new Error('Method not implemented.');
+  }
+
+  // eslint-disable-next-line
+  public async findAll(): Promise<SessionHandlerInterface[]> {
     throw new Error('Method not implemented.');
   }
 
