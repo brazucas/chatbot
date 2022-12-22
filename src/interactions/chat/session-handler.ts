@@ -1,9 +1,8 @@
 import { Prisma } from '@prisma/client';
-import { QuestionCustomerAnswerInterface } from './interface/question-customer-answer.interface';
 import { QuestionInterface } from './interface/question.interface';
+import { SessionHandlerInterface } from './interface/session-handler.interface';
 import { SessionQuestionLogInterface } from './interface/session-quesiton-log.interface';
 import SessionStatus from './interface/session-status.enum';
-import { SessionHandlerInterface } from './interface/session-handler.interface';
 
 export const sessionRelations = Prisma.validator<Prisma.SessionArgs>()({
   include: {
@@ -40,12 +39,12 @@ export default class SessionHandler implements SessionHandlerInterface {
   }
 
   // eslint-disable-next-line
-  setLastInteraction(timestamp: Date): Promise<void> {
+  setLastInteraction(): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
   // eslint-disable-next-line
-  storeAnswer(answer: string): Promise<QuestionCustomerAnswerInterface> {
+  handlerQuestionAnswer(): Promise<QuestionInterface> {
     throw new Error('Method not implemented.');
   }
 
@@ -56,16 +55,6 @@ export default class SessionHandler implements SessionHandlerInterface {
 
   // eslint-disable-next-line
   triggerQuestionActions(): Promise<SessionQuestionLogInterface[]> {
-    throw new Error('Method not implemented.');
-  }
-
-  // eslint-disable-next-line
-  nextQuestion(): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
-
-  // eslint-disable-next-line
-  previousQuestion(): Promise<void> {
     throw new Error('Method not implemented.');
   }
 

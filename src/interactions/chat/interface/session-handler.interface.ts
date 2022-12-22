@@ -1,5 +1,4 @@
 // eslint-disable-next-line
-import { QuestionCustomerAnswerInterface } from './question-customer-answer.interface';
 // eslint-disable-next-line
 import { QuestionInterface } from './question.interface';
 import { SessionQuestionLogInterface } from './session-quesiton-log.interface';
@@ -12,9 +11,7 @@ export interface SessionHandlerInterface {
   get status(): SessionStatus;
   get currentQuestion(): QuestionInterface;
   get isBusy(): boolean;
-  storeAnswer(answer: string): Promise<QuestionCustomerAnswerInterface>;
-  nextQuestion(): Promise<void>;
-  previousQuestion(): Promise<void>;
+  handlerQuestionAnswer(answer: string): Promise<QuestionInterface>;
   skipToQuestion(question: QuestionInterface): Promise<void>;
   setLastInteraction(timestamp: Date): Promise<void>;
   setStatus(status: SessionStatus): Promise<void>;
