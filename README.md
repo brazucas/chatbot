@@ -1,8 +1,10 @@
+<a href="https://codeclimate.com/github/yetanotherpickle/chatbot/maintainability"><img src="https://api.codeclimate.com/v1/badges/b091b628c6b9553c0bbc/maintainability" /></a> <a href="https://codeclimate.com/github/yetanotherpickle/chatbot/test_coverage"><img src="https://api.codeclimate.com/v1/badges/b091b628c6b9553c0bbc/test_coverage" /></a>
+
 # UNDER DEVELOPMENT
 
-## BRZ Chatbot
+## YetAnotherPicke Chatbot
 
-A chatbot initially designed to work with Whatsapp Web API offering some cool BRZ related features into the app by sending commands to a bot.
+A chatbot initially designed to work with Whatsapp Web API offering some cool features into the app by sending commands to a bot.
 
 @see our [roadmap](roadmap.md).
 
