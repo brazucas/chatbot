@@ -4,8 +4,8 @@ on:
     branches:
       - main
     paths:
-      - src/*
-      - tests/*
+      - src/**
+      - tests/**
       - '*.json'
       - yarn.lock
   pull_request:
