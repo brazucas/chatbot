@@ -12,7 +12,7 @@ module.exports = {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
-  coverageDirectory: '../coverage',
+  coverageDirectory: './coverage',
   testEnvironment: 'node',
   testPathIgnorePatterns: [
     'chatbot/tests/helpers.ts',
