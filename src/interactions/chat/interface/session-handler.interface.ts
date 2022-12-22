@@ -11,7 +11,7 @@ export interface SessionHandlerInterface {
   get status(): SessionStatus;
   get currentQuestion(): QuestionInterface;
   get isBusy(): boolean;
-  handlerQuestionAnswer(answer: string): Promise<QuestionInterface>;
+  handleQuestionAnswer(answer: string): Promise<QuestionInterface>;
   skipToQuestion(question: QuestionInterface): Promise<void>;
   setLastInteraction(timestamp: Date): Promise<void>;
   setStatus(status: SessionStatus): Promise<void>;

@@ -1,10 +1,9 @@
-import {
-  Prisma, QuestionType, SessionStatus,
-} from '@prisma/client';
+import { QuestionType, SessionStatus } from '@prisma/client';
 import ChatInteraction from '@src/interactions/chat/chat.interaction';
+import { QuestionInterface } from '@src/interactions/chat/interface/question.interface';
 import PrismaService from '@src/interactions/chat/service/prisma.service';
 import SessionService from '@src/interactions/chat/service/session.service';
-import SessionHandler, { sessionRelations } from '@src/interactions/chat/session-handler';
+import SessionHandler from '@src/interactions/chat/session-handler';
 import ChatbotClient from '@src/interface/chatbot-client.abstract';
 import { InteractionResponseType } from '@src/typings';
 import { mockInitialize, TestableApp } from '../../helpers';
@@ -43,7 +42,9 @@ describe('ChatInteraction', () => {
     status: SessionStatus.ACTIVE,
   });
 
-  beforeAll(async () => {
+  const spySessionHandlerHandleQuestionAnswer = jest.spyOn(sessionHandler, 'handleQuestionAnswer');
+
+  beforeEach(async () => {
     sessionService = new SessionService();
     spySessionFind = jest.spyOn(sessionService, 'find');
     spySessionCreate = jest.spyOn(sessionService, 'create');
@@ -56,9 +57,7 @@ describe('ChatInteraction', () => {
     interaction = new ChatInteraction(sessionService);
     client = new MockClient([interaction]);
     chatbot = await mockInitialize(client);
-  });
 
-  beforeEach(async () => {
     spyClientEvaluateResponse = jest.spyOn(client, 'evaluateResponse');
     spyClientEvaluateResponse.mockReset();
     spySessionFind.mockReset();
@@ -89,38 +88,12 @@ describe('ChatInteraction', () => {
     expect(spySessionCreate).toBeCalledTimes(1);
   });
 
-  it('should store answer and continue session while digesting message', async () => {
-    const session: Prisma.SessionGetPayload<typeof sessionRelations> = {
-      id: 1,
-      chatId: 'chatId',
-      createdAt: new Date('2021-01-01'),
-      currentQuestionId: 1,
-      currentQuestion: {
-        id: 1,
-        createdAt: new Date('2021-01-01'),
-        isActive: true,
-        parentId: null,
-        title: 'Question 1',
-        type: QuestionType.FreeText,
-      },
-      lastInteraction: new Date('2021-01-01'),
-      status: SessionStatus.ACTIVE,
-      customer: 'customer',
-      triggerId: 123,
-    };
+  it('should continue session when finish digesting message', async () => {
+    spySessionHandlerHandleQuestionAnswer.mockResolvedValueOnce({
+      title: 'title',
+    } as QuestionInterface);
 
-    spySessionFind.mockResolvedValueOnce(session);
-
-    // spyQuestionCustomerAnswerCreate.mockResolvedValueOnce({
-    //   createdAt: new Date('2021-01-01'),
-    //   id: 1,
-    //   text: 'hello',
-    //   sessionId: 1,
-    // } as SessionCustomerAnswer);
-
-    // spySessionBuildHandler.mockResolvedValueOnce(new SessionHandler(session));
-
-    const call = interaction.digestMessage({
+    const call = await interaction.digestMessage({
       chatId: 'chatId',
       body: 'hello',
       author: 'Pedro',
@@ -129,14 +102,12 @@ describe('ChatInteraction', () => {
       id: '123',
     });
 
-    await expect(call).resolves.toReturnWith(expect.objectContaining({
+    expect(call).toMatchObject(expect.objectContaining({
       responseType: InteractionResponseType.Reply,
       body: expect.any(String),
     }));
 
-    expect(spySessionFind).toBeCalledTimes(1);
     expect(spySessionCreate).not.toBeCalled();
-    // expect(spySessionBuildHandler).toBeCalledTimes(1);
-    // expect(spyQuestionCustomerAnswerCreate).toBeCalledTimes(1);
+    expect(spySessionHandlerHandleQuestionAnswer).toBeCalledTimes(1);
   });
 });

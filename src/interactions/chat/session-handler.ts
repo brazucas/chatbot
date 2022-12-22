@@ -44,7 +44,7 @@ export default class SessionHandler implements SessionHandlerInterface {
   }
 
   // eslint-disable-next-line
-  handlerQuestionAnswer(): Promise<QuestionInterface> {
+  handleQuestionAnswer(): Promise<QuestionInterface> {
     throw new Error('Method not implemented.');
   }
 
