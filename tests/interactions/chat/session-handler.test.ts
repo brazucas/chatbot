@@ -18,7 +18,6 @@ describe('SessionHandler', () => {
     customer: '1',
     lastInteraction: new Date(),
     status: SessionStatus.ACTIVE,
-    triggerId: 1,
   });
 
   it('should be defined', () => {
