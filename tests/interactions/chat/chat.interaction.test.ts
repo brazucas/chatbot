@@ -33,7 +33,6 @@ describe('ChatInteraction', () => {
       type: QuestionType.Single,
     },
     customer: 'customer',
-    triggerId: 123,
     id: 1,
     chatId: 'chatId',
     createdAt: new Date('2021-01-01'),
