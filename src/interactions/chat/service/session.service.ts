@@ -1,7 +1,7 @@
 import { Session } from '@prisma/client';
-import { SessionHandlerInterface } from '@src/interactions/chat/interface/session-handler.interface';
-import ServiceInterface from '../interface/service.interface';
-import { SessionServiceInterface } from '../interface/session-service.interface';
+import { SessionHandlerInterface } from '@src/interactions/chat/types/session-handler.interface';
+import ServiceInterface from '../types/service.interface';
+import { SessionServiceInterface } from '../types/session-service.interface';
 import SessionHandler from '../session-handler';
 
 export default class SessionService

@@ -1,7 +1,7 @@
-import { QuestionServiceInterface } from '../interface/question-service.interface';
-import { QuestionInterface } from '../interface/question.interface';
-import ServiceInterface from '../interface/service.interface';
-import { SessionHandlerInterface } from '../interface/session-handler.interface';
+import { QuestionServiceInterface } from '../types/question-service.interface';
+import { QuestionInterface } from '../types/question.interface';
+import ServiceInterface from '../types/service.interface';
+import { SessionHandlerInterface } from '../types/session-handler.interface';
 
 export default class QuestionService
   extends ServiceInterface

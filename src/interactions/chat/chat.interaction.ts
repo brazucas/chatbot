@@ -2,8 +2,8 @@ import {
   ChatDigestResponse, ChatMessage, Interaction, InteractionResponseType,
 } from '@src/typings';
 import { lastValueFrom, ReplaySubject } from 'rxjs';
-import { QuestionInterface } from './interface/question.interface';
-import { SessionHandlerInterface } from './interface/session-handler.interface';
+import { QuestionInterface } from './types/question.interface';
+import { SessionHandlerInterface } from './types/session-handler.interface';
 import SessionService from './service/session.service';
 
 type Sessions = ReplaySubject<{ [key in string]: SessionHandlerInterface }>;

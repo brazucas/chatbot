@@ -1,6 +1,6 @@
 import { QuestionType, SessionStatus } from '@prisma/client';
 import ChatInteraction from '@src/interactions/chat/chat.interaction';
-import { QuestionInterface } from '@src/interactions/chat/interface/question.interface';
+import { QuestionInterface } from '@src/interactions/chat/types/question.interface';
 import PrismaService from '@src/interactions/chat/service/prisma.service';
 import SessionService from '@src/interactions/chat/service/session.service';
 import SessionHandler from '@src/interactions/chat/session-handler';

@@ -1,8 +1,8 @@
 import { Prisma } from '@prisma/client';
-import { QuestionInterface } from './interface/question.interface';
-import { SessionHandlerInterface } from './interface/session-handler.interface';
-import { SessionQuestionLogInterface } from './interface/session-quesiton-log.interface';
-import SessionStatus from './interface/session-status.enum';
+import { QuestionInterface } from './types/question.interface';
+import { SessionHandlerInterface } from './types/session-handler.interface';
+import { SessionQuestionLogInterface } from './types/session-quesiton-log.interface';
+import SessionStatus from './types/session-status.enum';
 
 export const sessionRelations = Prisma.validator<Prisma.SessionArgs>()({
   include: {
