@@ -1,5 +1,7 @@
-export enum QuestionActionType {
-  HttpRequest = 'HttpRequest',
-}
+const QuestionActionDef = {
+  HttpRequest: 'HttpRequest',
+} as const;
 
-export default QuestionActionType;
+type QuestionAction = typeof QuestionActionDef[keyof typeof QuestionActionDef];
+
+export default QuestionAction;
