@@ -4,7 +4,10 @@ import {
 } from '@src/typings';
 
 export default abstract class ChatbotClient<T> implements ChatbotClientInterface {
-  constructor(protected readonly interactions: Interaction[]) {
+  constructor(
+    protected readonly interactions: Interaction[],
+    protected readonly loggerSvc = LoggerService.getInstance<LoggerService>(),
+  ) {
   }
 
   protected async digestMessage(
@@ -12,25 +15,25 @@ export default abstract class ChatbotClient<T> implements ChatbotClientInterface
     rawMessage: T,
   ): Promise<void> {
     if (process.env.DEBUG) {
-      LoggerService.logger().warn(`Checking incoming message: ${message.body}`);
+      this.loggerSvc.logger().warn(`Checking incoming message: ${message.body}`);
     }
 
     // eslint-disable-next-line
     for await (const interaction of this.interactions) {
       if (interaction.config.pattern.test(message.body)) {
         if (process.env.DEBUG) {
-          LoggerService.logger().warn(`Digesting message: ${message.body}`);
+          this.loggerSvc.logger().warn(`Digesting message: ${message.body}`);
         }
 
         const response = await interaction.digestMessage(message);
 
         if (process.env.DEBUG) {
-          LoggerService.logger().warn('Response:', response);
+          this.loggerSvc.logger().warn('Response:', response);
         }
 
         this.evaluateResponse(response, rawMessage);
       } else if (process.env.DEBUG) {
-        LoggerService.logger().warn(`Ignoring message: ${message.body}`);
+        this.loggerSvc.logger().warn(`Ignoring message: ${message.body}`);
       }
     }
   }

@@ -17,12 +17,15 @@ export enum Groups {
 }
 
 export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
-  constructor(protected readonly interactions: Interaction[]) {
+  constructor(
+    protected readonly interactions: Interaction[],
+    protected readonly loggerSvc = LoggerService.getInstance<LoggerService>(),
+  ) {
     super(interactions);
   }
 
   initialize(): Promise<void> {
-    LoggerService.logger().warn('Initializing whatsapp client');
+    this.loggerSvc.logger().warn('Initializing whatsapp client');
 
     const client = new Client({
       authStrategy: new LocalAuth(),
@@ -37,19 +40,19 @@ export class WhatsappClient extends ChatbotClient<WAWebJS.Message> {
     client.on('qr', (qr) => qrcode.generate(qr, { small: true }));
 
     client.on('ready', async () => {
-      LoggerService.logger().warn('Client is ready!');
+      this.loggerSvc.logger().warn('Client is ready!');
     });
 
     client.on('disconnected', async () => {
-      LoggerService.logger().warn('Client disconnected!');
+      this.loggerSvc.logger().warn('Client disconnected!');
     });
 
     client.on('auth_failure', (message) => {
-      LoggerService.logger().warn('Auth failure', message);
+      this.loggerSvc.logger().warn('Auth failure', message);
     });
 
     client.on('authenticated', async () => {
-      LoggerService.logger().warn('authenticated');
+      this.loggerSvc.logger().warn('authenticated');
     });
 
     client.on('message_create', async (msg) => {

@@ -7,21 +7,21 @@ export default class LoggerService extends AbstractService {
 
   protected logger$: Logger;
 
-  constructor() {
+  constructor(protected readonly _winston = winston) {
     super();
 
-    const logger = winston.createLogger({
+    const logger = _winston.createLogger({
       level: 'info',
-      format: winston.format.json(),
+      format: _winston.format.json(),
       defaultMeta: { service: 'user-service' },
       transports: [
-        new winston.transports.Console(),
+        new _winston.transports.Console(),
       ],
     });
 
     if (process.env.NODE_ENV === 'production') {
-      logger.add(new winston.transports.Console({
-        format: winston.format.simple(),
+      logger.add(new _winston.transports.Console({
+        format: _winston.format.simple(),
       }));
     }
 
@@ -40,7 +40,7 @@ export default class LoggerService extends AbstractService {
     LoggerService.instance = this;
   }
 
-  static logger(): Logger {
-    return LoggerService.getInstance<LoggerService>().logger$;
+  public logger(): Logger {
+    return this.logger$;
   }
 }

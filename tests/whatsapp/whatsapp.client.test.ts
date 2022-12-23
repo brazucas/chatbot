@@ -41,8 +41,10 @@ jest.mock('qrcode-terminal', () => ({
 const loggerWarn = jest.fn();
 jest.mock('@src/interactions/chat/service/logger.service', () => ({
   default: {
-    logger: jest.fn(() => ({
-      warn: loggerWarn,
+    getInstance: jest.fn(() => ({
+      logger: jest.fn(() => ({
+        warn: loggerWarn,
+      })),
     })),
   },
 }));

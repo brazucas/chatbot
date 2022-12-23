@@ -7,7 +7,6 @@ import AbstractService from './abstract.service';
 export default class SessionService
   extends AbstractService
   implements SessionServiceInterface {
-
   public constructor() {
     super();
   }

@@ -5,9 +5,11 @@ import { MockInteraction } from '../helpers';
 const loggerWarn = jest.fn();
 jest.mock('@src/interactions/chat/service/logger.service', () => ({
   default: {
-    logger: jest.fn(() => ({
-      warn: loggerWarn,
-    })),
+    getInstance: () => ({
+      logger: () => ({
+        warn: loggerWarn,
+      }),
+    }),
   },
 }));
 

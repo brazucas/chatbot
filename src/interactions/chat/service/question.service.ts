@@ -6,7 +6,6 @@ import AbstractService from './abstract.service';
 export default class QuestionService
   extends AbstractService
   implements QuestionServiceInterface {
-
   private constructor() {
     super();
   }

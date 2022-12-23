@@ -12,7 +12,7 @@ export default class ChatInteraction extends Interaction {
   private sessions: Sessions = new ReplaySubject();
 
   constructor(
-    private readonly sessionSvc = SessionService.getInstance(),
+    private readonly sessionSvc = SessionService.getInstance<SessionService>(),
   ) {
     super({
       pattern: /^chatbot$/,

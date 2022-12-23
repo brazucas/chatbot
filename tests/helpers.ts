@@ -13,8 +13,6 @@ export type TestableApp = {
 export const mockInitialize = (
   client: ChatbotClient<any>,
 ): Promise<TestableApp> => (async () => {
-  console.log('Initializing...');
-
   await client.initialize();
 
   return {
