@@ -1,6 +1,5 @@
 import LoggerService from '@src/interactions/chat/service/logger.service';
 import * as winston from 'winston';
-import { Logger } from 'winston';
 
 let spyWinston: jest.SpyInstance;
 let spyWinstonTransports: jest.SpyInstance;
