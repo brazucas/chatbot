@@ -10,7 +10,6 @@ export interface QuestionInterface {
   get type(): QuestionType;
   get isActive(): boolean;
   get createdAt(): Date;
-  get session(): SessionHandlerInterface;
   get options(): QuestionOptionInterface[];
   get actions(): QuestionActionInterface[];
   get parent(): QuestionInterface | null;
