@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
+import AbstractService from './abstract.service';
 
-export default class PrismaService extends PrismaClient {
+export default class PrismaService extends PrismaClient implements AbstractService {
   private static instance: PrismaService;
 
   public static getInstance(): PrismaService {

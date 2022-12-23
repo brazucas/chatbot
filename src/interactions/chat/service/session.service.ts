@@ -1,23 +1,15 @@
 import { Session } from '@prisma/client';
 import { SessionHandlerInterface } from '@src/interactions/chat/types/session-handler.interface';
-import ServiceInterface from '../types/service.interface';
 import { SessionServiceInterface } from '../types/session-service.interface';
 import SessionHandler from '../session-handler';
+import AbstractService from './abstract.service';
 
 export default class SessionService
-  extends ServiceInterface
+  extends AbstractService
   implements SessionServiceInterface {
-  private static instance: SessionService;
 
   public constructor() {
     super();
-  }
-
-  public static getInstance(): SessionService {
-    if (!SessionService.instance) {
-      SessionService.instance = new SessionService();
-    }
-    return SessionService.instance;
   }
 
   // eslint-disable-next-line

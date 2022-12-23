@@ -1,12 +1,15 @@
 import { Logger, transports } from 'winston';
 import * as winston from 'winston';
+import AbstractService from './abstract.service';
 
-export default class LoggerService {
+export default class LoggerService extends AbstractService {
   static instance: LoggerService;
 
   protected logger$: Logger;
 
   constructor() {
+    super();
+
     const logger = winston.createLogger({
       level: 'info',
       format: winston.format.json(),
@@ -38,14 +41,6 @@ export default class LoggerService {
   }
 
   static logger(): Logger {
-    return LoggerService.getInstance().logger$;
-  }
-
-  static getInstance(): LoggerService {
-    if (!LoggerService.instance) {
-      LoggerService.instance = new LoggerService();
-    }
-
-    return LoggerService.instance;
+    return LoggerService.getInstance<LoggerService>().logger$;
   }
 }
