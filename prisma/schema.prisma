@@ -27,19 +27,8 @@ model Session {
   currentQuestion   Question                @relation(fields: [currentQuestionId], references: [id])
   currentQuestionId Int
   createdAt         DateTime                @default(now())
-  trigger           SessionTrigger          @relation(fields: [triggerId], references: [id])
-  triggerId         Int
   customerAnswers   SessionCustomerAnswer[]
   questionLogs      SessionQuestionLog[]
-}
-
-model SessionTrigger {
-  id                Int       @id @default(autoincrement())
-  message           String    @db.VarChar(128)
-  isPartial         Boolean
-  createdAt         DateTime  @default(now())
-  isActive          Boolean   @default(true)
-  sessionsTriggered Session[]
 }
 
 enum QuestionType {
